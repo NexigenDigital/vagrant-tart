@@ -35,7 +35,7 @@ module VagrantPlugins
         require_relative "synced_folder"
         SyncedFolder
       end
-      
+
       synced_folder_capability(:tart, "mount_options") do
         require_relative "cap/mount_options"
         Cap::MountOptions
