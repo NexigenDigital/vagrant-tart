@@ -34,7 +34,7 @@ module VagrantPlugins
 
           # virtiofs mount options
 
-          # For operating systems using systemd, we need to specify automounting 
+          # For operating systems using systemd, we need to specify automounting
           # and running prior-to remote filesystems being mounted,
           # This mimics the behaviour of _netdev in standard systems
           if systemd?(comm)
