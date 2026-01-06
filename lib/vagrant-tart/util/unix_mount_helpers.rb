@@ -108,8 +108,8 @@ module VagrantPlugins
       def merge_mount_options(base, overrides)
         base = base.join(",").split(",")
         overrides = overrides.join(",").split(",")
-        b_kv = [base.map { |item| item.split("=", 2) }].to_h
-        o_kv = [overrides.map { |item| item.split("=", 2) }].to_h
+        b_kv = base.to_h { |item| item.split("=", 2) }
+        o_kv = overrides.to_h { |item| item.split("=", 2) }
         merged = {}.tap do |opts|
           (b_kv.keys + o_kv.keys).uniq.each do |key|
             opts[key] = o_kv.fetch(key, b_kv[key])
