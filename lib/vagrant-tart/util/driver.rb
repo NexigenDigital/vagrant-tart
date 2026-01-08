@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "etc"
 require "pathname"
 require "vagrant/util/busy"
 require "vagrant/util/subprocess"
@@ -103,7 +104,7 @@ module VagrantPlugins
         # @param image [String] The image to pull
         # @yield [(String, String)] The output of the command
         def pull(image, &block)
-          cmd = ["tart", "pull", image]
+          cmd = ["tart", "pull", "--concurrency", Etc.nprocessors, image]
           execute(*cmd, &block)
         end
 
