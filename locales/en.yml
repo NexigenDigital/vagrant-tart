@@ -33,6 +33,8 @@ en:
         Configuration must specify either vnc or vnc_experimental setting
       vnc_experimental_invalid: |-
         Configuration must specify a valid VNC experimental setting (true or false)
+      always_pull_image_invalid: |-
+        Configuration must specify a valid always pull image setting (true or false)
 
     errors:
       command_error: |-

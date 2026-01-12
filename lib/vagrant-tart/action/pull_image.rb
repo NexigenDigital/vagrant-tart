@@ -19,10 +19,11 @@ module VagrantPlugins
           config = machine.provider_config
           driver = machine.provider.driver
           image = config.image
+          always_pull = config.always_pull_image
 
           # Check if the virtual machine image is already present
           list = driver.list
-          return @app.call(env) if list.any?(image)
+          return @app.call(env) if list.any?(image) && !always_pull
 
           env[:ui].output(I18n.t("vagrant_tart.messages.pulling_image", image: image))
           driver.pull(image) do |_type, data|

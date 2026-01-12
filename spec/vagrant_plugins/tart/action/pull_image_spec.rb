@@ -5,7 +5,7 @@ require_relative "action_spec_helper"
 RSpec.describe VagrantPlugins::Tart::Action::PullImage do
   subject(:sut) { described_class.new(app, env) }
 
-  let(:config)   { instance_double("config", image: "image", name: "name") }
+  let(:config)   { instance_double("config", image: "image", name: "name", always_pull_image: false) }
   let(:provider) { instance_double("provider", driver: driver) }
   let(:ui)       { instance_double("ui", output: nil, detail: nil) }
   let(:machine)  { instance_double("machine", provider_config: config, provider: provider, ui: ui) }

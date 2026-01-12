@@ -45,6 +45,8 @@ module VagrantPlugins
       attr_accessor :ip_resolver
       # @return [Array<String>] Extra arguments to pass to the tart run command
       attr_accessor :extra_run_args
+      # @return [Boolean] Whether to always pull the image
+      attr_accessor :always_pull_image
 
       # @return [Array<String>] List of volumes to mount
       attr_accessor :volumes
@@ -58,6 +60,7 @@ module VagrantPlugins
         @password = UNSET_VALUE
 
         @image = UNSET_VALUE
+        @always_pull_image = UNSET_VALUE
         @name = UNSET_VALUE
 
         @gui = UNSET_VALUE
@@ -97,6 +100,7 @@ module VagrantPlugins
         @vnc_experimental = false if @vnc_experimental == UNSET_VALUE
         @ip_resolver = "dhcp" if @ip_resolver == UNSET_VALUE
         @extra_run_args = [] if @extra_run_args == UNSET_VALUE
+        @always_pull_image = false if @always_pull_image == UNSET_VALUE
       end
 
       # Validate the configuration
@@ -153,6 +157,10 @@ module VagrantPlugins
 
         # Check that the extra run arguments is an array of strings
         errors << I18n.t("vagrant_tart.config.extra_run_args_invalid") unless @extra_run_args.is_a? Array
+
+        # Check that the always pull image flag is a valid boolean
+        errors << I18n.t("vagrant_tart.config.always_pull_image_invalid") unless
+          @always_pull_image == true || @always_pull_image == false
 
         { "Tart Provider" => errors }
       end
