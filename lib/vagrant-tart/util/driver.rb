@@ -104,7 +104,7 @@ module VagrantPlugins
         # @param image [String] The image to pull
         # @yield [(String, String)] The output of the command
         def pull(image, &block)
-          cmd = ["tart", "pull", "--concurrency", Etc.nprocessors, image]
+          cmd = ["tart", "pull", "--concurrency", Etc.nprocessors.to_s, image]
           execute(*cmd, &block)
         end
 
