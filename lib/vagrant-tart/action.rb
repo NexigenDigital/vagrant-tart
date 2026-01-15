@@ -54,7 +54,11 @@ module VagrantPlugins
           b.use Call, IsState, :not_created do |env, b1|
             raise Errors::InstanceNotCreatedError if env[:result]
 
-            b1.use StopInstance
+            b1.use Call, GracefulHalt, :stopped, :running do |env2, b2|
+              if !env2[:result]
+                b1.use StopInstance
+              end
+            end
           end
         end
       end
@@ -80,7 +84,7 @@ module VagrantPlugins
           b.use Call, IsState, :not_created do |env, b1|
             raise Errors::InstanceNotCreatedError if env[:result]
 
-            b1.use GracefulHalt
+            b1.use action_halt
             b1.use action_start
           end
         end
